@@ -82,7 +82,6 @@ function bodyScrollUnlock() {
   setTimeout(() => {
     body.style.overflow = "auto";
     body.style.paddingRight = "0px";
-  
   }, 250)
 }
 
