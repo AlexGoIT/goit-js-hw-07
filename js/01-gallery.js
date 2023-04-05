@@ -2,6 +2,7 @@ import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
 const galleryContainer = document.querySelector(".gallery");
+let instance;
 
 // Create markup for gallery
 function createItemsGalleryMarkup(galleryItems) {
@@ -46,26 +47,25 @@ galleryContainer.addEventListener('click', (e) => {
   showModal(galleryImgEl);
 });
 
-let instance;
 
 // Create a basic lightbox and show modal
 function showModal({ dataset: { source }, alt }) {
   instance = basicLightbox.create(`<img src="${source}" alt="${alt}">`, {
-    onShow: onOpeningModal,
-    onClose: onClosingModal,
+    onShow: openModal,
+    onClose: closeModal,
   });
 
   instance.show();
 }
 
 // Before open lightbox
-function onOpeningModal() {
+function openModal() {
   window.addEventListener("keydown", onKeyPress);
   bodyScrollLock();
 }
 
 // Before close lightbox
-function onClosingModal() {
+function closeModal() {
   window.removeEventListener("keydown", onKeyPress);
   bodyScrollUnlock();
 }
@@ -73,9 +73,12 @@ function onClosingModal() {
 // Body scroll lock function
 function bodyScrollLock() {
   const body = document.querySelector("body");
-  
-  body.style.paddingRight = "17px";
+  const bodyStyle = window.getComputedStyle(body);
+  const bodyWidth = body.offsetWidth + parseInt(bodyStyle.marginLeft) + parseInt(bodyStyle.marginRight);
+  const verticalScrollBar = window.innerWidth - bodyWidth;
+
   body.style.overflow = "hidden";
+  body.style.paddingRight = verticalScrollBar + "px";
 }
 
 // Body scroll unlock function
