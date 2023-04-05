@@ -88,7 +88,7 @@ function bodyScrollUnlock() {
   setTimeout(() => {
     body.style.overflow = "auto";
     body.style.paddingRight = "";
-  }, 250)
+  }, 250);
 }
 
 // Close lightbox on Escape

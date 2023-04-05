@@ -36,3 +36,27 @@ const lightBox = new SimpleLightbox(".gallery a", {
   captionDelay: 250,
   disableScroll: false,
 });
+
+// Body scroll lock
+lightBox.on("show.simplelightbox", () => {
+  const body = document.querySelector("body");
+  const bodyStyle = window.getComputedStyle(body);
+  const bodyWidth =
+    body.offsetWidth +
+    parseInt(bodyStyle.marginLeft) +
+    parseInt(bodyStyle.marginRight);
+  const verticalScrollBar = window.innerWidth - bodyWidth;
+
+  body.style.overflow = "hidden";
+  body.style.paddingRight = verticalScrollBar + "px";
+});
+
+// Body scroll unlock
+lightBox.on("close.simplelightbox", () => {
+  const body = document.querySelector("body");
+
+  setTimeout(() => {
+    body.style.overflow = "auto";
+    body.style.paddingRight = "";
+  }, 250);
+})
