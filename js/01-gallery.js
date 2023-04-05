@@ -31,6 +31,7 @@ galleryContainer.insertAdjacentHTML(
   createItemsGalleryMarkup(galleryItems)
 );
 
+// Gallery event listener by click
 galleryContainer.addEventListener('click', (e) => {
   e.preventDefault();
   
@@ -47,7 +48,7 @@ galleryContainer.addEventListener('click', (e) => {
 
 let instance;
 
-// Create a basic lightbox
+// Create a basic lightbox and show modal
 function showModal({ dataset: { source }, alt }) {
   instance = basicLightbox.create(`<img src="${source}" alt="${alt}">`, {
     onShow: onOpeningModal,
@@ -69,6 +70,7 @@ function onClosingModal() {
   bodyScrollUnlock();
 }
 
+// Body scroll lock function
 function bodyScrollLock() {
   const body = document.querySelector("body");
   
@@ -76,15 +78,17 @@ function bodyScrollLock() {
   body.style.overflow = "hidden";
 }
 
+// Body scroll unlock function
 function bodyScrollUnlock() {
   const body = document.querySelector("body");
 
   setTimeout(() => {
     body.style.overflow = "auto";
-    body.style.paddingRight = "0px";
+    body.style.paddingRight = "";
   }, 250)
 }
 
+// Close lightbox on Escape
 function onKeyPress(e) {
   if (e.code !== "Escape") {
     return;

@@ -26,11 +26,12 @@ function createItemsGalleryMarkup(galleryItems) {
 
 // Insert markup to gallery
 galleryContainer.insertAdjacentHTML(
-  "afterbegin",
+  "beforeend",
   createItemsGalleryMarkup(galleryItems)
 );
 
-const lightBox = new SimpleLightbox(".gallery li a", {
-  captionData: 'alt',
+// Create lightbox
+const lightBox = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
   captionDelay: 250,
 });
