@@ -34,4 +34,5 @@ galleryContainer.insertAdjacentHTML(
 const lightBox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionDelay: 250,
+  disableScroll: false,
 });
